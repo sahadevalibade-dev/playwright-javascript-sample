@@ -8,6 +8,7 @@ test("valid Login",async function({page}){
   await page.getByPlaceholder("Username").fill("Admin",delay=200);
   
   await page.locator("//input[@placeholder='Password']").fill("admin123",delay=200);
+  console.log("The current url is: " + page.url());
   
   await page.locator("//button[@type='submit']").click();
 
