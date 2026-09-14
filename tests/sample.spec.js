@@ -1,19 +1,29 @@
-const{test, expect} = require('@playwright/test');
-test('home page has title and links to intro page', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+const {test, expect}=require('@playwright/test')
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/i);
+test('My first test',async function({page}){
 
-  // create a locator
-  const getstatred = page.getByRole('link', { name: 'Get started' });
+  expect(1+1).toBe(2)
+})
 
-  // Expect an attribute "to be strictly equal" to the value.
-  await expect(getstatred).toHaveAttribute('href', '/docs/intro');
+test.skip('My second test',async function({page}){
+  expect(2+2).toBe(5)
+})
 
-  // Click the get started link.
-  await getstatred.click();
+test('My third test',async function({page}){
+  expect(2+3).toBe(5)
+})
 
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/);
-});
+test('My fourth test',async function({page}){
+  expect("Sahadev Aliabde").toContain("Sahadev")
+  expect(true).toBeTruthy()
+})
+
+test('My fifth test',async function({page}){
+  
+  expect(false).toBeFalsy()
+})
+
+test('My sixth test',async function({page}){
+  expect("Sahadev Alibade".includes("Sahadev")).toBeTruthy()
+  
+})
