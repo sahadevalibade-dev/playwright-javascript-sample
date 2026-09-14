@@ -1,8 +1,12 @@
-const { defineConfig, devices } = require('@playwright/test');
+const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
   fullyParallel: true,
+  timeout: 30 * 1000,
+  expect: {
+    timeout: 5000,
+  },
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
@@ -17,8 +21,11 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
-        channel: 'chrome',
+        browserName: 'chromium',
+        headless: true,
+        launchOptions: {
+          executablePath: 'C:/Users/admin/Downloads/chrome-win64/chrome.exe',
+        },
       },
     },
   ],

@@ -1,36 +1,29 @@
-const { test, expect } = require('@playwright/test');
+const {test, expect}=require('@playwright/test')
 
-const samplePage = `
-  <html>
-    <body>
-      <h1>Example Domain</h1>
-      <a href="#iana-details">More information...</a>
-      <section id="iana-details">
-        <p>Sample data for Playwright learning.</p>
-      </section>
-    </body>
-  </html>
-`;
+test('My first test',async function({page}){
 
-test.describe('Playwright Learning Basics', () => {
+  expect(1+1).toBe(2)
+})
 
-  test.beforeEach(async ({ page }) => {
-    await page.setContent(samplePage);
-  });
+test.skip('My second test',async function({page}){
+  expect(2+2).toBe(5)
+})
 
-  test('Step 1: Navigate and check page elements', async ({ page }) => {
-    const heading = page.locator('h1');
-    await expect(heading).toHaveText('Example Domain');
-  });
+test('My third test',async function({page}){
+  expect(2+3).toBe(5)
+})
 
-  test('Step 2: Interact with links and assertions', async ({ page }) => {
-    const infoLink = page.locator('a:has-text("More information...")');
-    await expect(infoLink).toBeVisible();
+test('My fourth test',async function({page}){
+  expect("Sahadev Aliabde").toContain("Sahadev")
+  expect(true).toBeTruthy()
+})
 
-    await infoLink.click();
+test('My fifth test',async function({page}){
+  
+  expect(false).toBeFalsy()
+})
 
-    await expect(page).toHaveURL(/#iana-details/);
-    await expect(page.locator('#iana-details')).toContainText('Sample data for Playwright learning.');
-  });
-
-});
+test('My sixth test',async function({page}){
+  expect("Sahadev Alibade".includes("Sahadev")).toBeTruthy()
+  
+})
