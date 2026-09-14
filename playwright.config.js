@@ -1,4 +1,4 @@
-const { defineConfig, devices } = require('@playwright/test');
+const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
@@ -17,8 +17,11 @@ module.exports = defineConfig({
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
-        channel: 'chrome',
+        browserName: 'chromium',
+        headless: true,
+        launchOptions: {
+          executablePath: 'C:/Users/admin/Downloads/chrome-win64/chrome.exe',
+        },
       },
     },
   ],

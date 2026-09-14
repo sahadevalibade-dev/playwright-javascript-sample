@@ -1,36 +1,19 @@
-const { test, expect } = require('@playwright/test');
+const{test, expect} = require('@playwright/test');
+test('home page has title and links to intro page', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
 
-const samplePage = `
-  <html>
-    <body>
-      <h1>Example Domain</h1>
-      <a href="#iana-details">More information...</a>
-      <section id="iana-details">
-        <p>Sample data for Playwright learning.</p>
-      </section>
-    </body>
-  </html>
-`;
+  // Expect a title "to contain" a substring.
+  await expect(page).toHaveTitle(/Playwright/i);
 
-test.describe('Playwright Learning Basics', () => {
+  // create a locator
+  const getstatred = page.getByRole('link', { name: 'Get started' });
 
-  test.beforeEach(async ({ page }) => {
-    await page.setContent(samplePage);
-  });
+  // Expect an attribute "to be strictly equal" to the value.
+  await expect(getstatred).toHaveAttribute('href', '/docs/intro');
 
-  test('Step 1: Navigate and check page elements', async ({ page }) => {
-    const heading = page.locator('h1');
-    await expect(heading).toHaveText('Example Domain');
-  });
+  // Click the get started link.
+  await getstatred.click();
 
-  test('Step 2: Interact with links and assertions', async ({ page }) => {
-    const infoLink = page.locator('a:has-text("More information...")');
-    await expect(infoLink).toBeVisible();
-
-    await infoLink.click();
-
-    await expect(page).toHaveURL(/#iana-details/);
-    await expect(page.locator('#iana-details')).toContainText('Sample data for Playwright learning.');
-  });
-
+  // Expects the URL to contain intro.
+  await expect(page).toHaveURL(/.*intro/);
 });
